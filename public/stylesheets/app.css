@@ -1,0 +1,124 @@
+i.icon{
+	font-size: 2em;
+	width: 5em;
+}
+.container.main{
+	margin-top: 7.0em;
+}
+.bottom{
+	text-align: center;
+	bottom: 100%;
+	position: absolute;
+}
+#remove {
+	display: inline;
+}
+.pen{
+	float: right;
+}
+
+.close{
+	width: 500px;
+	background: #0a2342;
+	color: #f2f3d;
+	margin: 40px auto;
+	margin-top: 7.0em;
+	border-radius: 6px;
+	padding: 10px 30px;
+}
+.h{
+	text-align: center;
+	color: white;
+}
+.input{
+	display: block;
+	width: 90%;
+	padding: 10px;
+	font-size: 14px;
+	outline: none;
+	margin-bottom: 20px;
+	border-radius: 5px;
+	border: 1px solid navajowhite;
+}
+.go{
+	width: 60%;
+	border: none;
+	outline: none;
+	height: 40px;
+	border-radius: 7px;
+	background: #fff;
+	cursor: pointer;
+	color:  #0a2342;
+	font-size: 25px;
+	font-weight: 300;
+}
+.para{
+	text-align: center;
+}
+.para a{
+	color: white;
+	text-decoration: none;
+}
+.li{
+	list-style: none;
+}
+.a{
+	text-decoration: none;
+}
+.navbar{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+	background-color: #0a2342;
+	color: white;
+}
+.nav-links a {
+	color: white;
+}
+.logo{
+	font-size: 32px;
+	font-weight: bold;
+}
+.menu{
+	display: flex;
+	gap: 1em;
+	font-size: 18px;
+}
+.menu li{
+	padding: 5px 14px;
+}
+input[type=checkbox]{
+	display: none;
+}
+.hamburger{
+	display: none;
+	font-size: 24px;
+	user-select: none;
+}
+@media (max-width: 768px){
+	.menu{
+		display: none;
+		position: absolute;
+		background: #0a2342;
+		right: 0;
+		left: 0;
+		padding-top: 0.2em;
+		text-align: center;
+		padding: 16px 0;
+	}
+	.menu li :hover{
+		display: inline-block;
+		background-color: #0a2342;
+		transition: 0.35s ease;
+	}
+	.menu li + li{
+		margin-top: 12px;
+	}
+	input[type=checkbox]:checked ~ .menu{
+		display: block;
+	}
+	.hamburger{
+		display: block;
+	}
+}
