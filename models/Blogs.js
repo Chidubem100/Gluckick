@@ -1,10 +1,16 @@
 var mongoose = require("mongoose");
 
 var blogSchema = new mongoose.Schema({
-	title: "string",
-	body: "string",
-	created: {type: Date, default: Date.now}
-});
+	title: {
+		type: String,
+		required: true,
+		maxlength: 50,	
+	},
+	body: {
+		type: String,
+		required: true
+	},
+},{timestamps: true});
 
 
 

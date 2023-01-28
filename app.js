@@ -1,19 +1,22 @@
-var express = require("express");
-var app         = express();
-var methodOverride = require("method-override");
-var expressSanitizer= require("express-sanitizer");
-var bodyParser  = require("body-parser");
-var mongoose    = require("mongoose");
-var passport = require("passport");
-var passportLocalMongoose = require("passport-local-mongoose");
-var LocalStrategy = require("passport-local");
-var User = require("./models/user");
-var Blog = require("./models/Blogs");
+const express = require("express");
+const app         = express();
+const methodOverride = require("method-override");
+const expressSanitizer= require("express-sanitizer");
+const bodyParser  = require("body-parser");
+// const mongoose    = require("mongoose");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
+const Blog = require("./models/Blogs");
 
 
+const notFound = require('./middlewares/NotFound');
+const connectDB = require('./db/connection');
 
 // APP CONFIG
-mongoose.connect("mongodb://localhost/restful_blog_app");
+// mongoose.connect("mongodb://localhost/restful_blog_app");
+
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -47,7 +50,7 @@ app.get("/blogs", function(req, res){
     });
 }); 
 
-app.get("/blogs/new", isLoggedIn, function(req, res){
+app.get("/blogs/new",  function(req, res){
 	res.render("new");
 });
 
@@ -62,7 +65,7 @@ app.post("/blogs", function(req, res){
 	});
 });
 
-app.get("/blogs/:id",isLoggedIn, function(req, res){
+app.get("/blogs/:id", function(req, res){
 	Blog.findById(req.params.id, function(err, foundBlog){
 		if(err){
 			res.redirect("/blogs");
@@ -143,14 +146,21 @@ app.get("/logout", function(req,res){
 	res.redirect("/blogs")
 });
 
-// middleware
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated()){
-		return next()
+
+app.use(notFound);
+
+
+const port = process.env.PORT || 3000
+
+const start = async() =>{
+	try {
+		await connectDB()
+		app.listen(port, () =>{
+			console.log(`server have started on ${port}`)
+		});
+	} catch (error) {
+		console.log(error)
 	}
-	res.redirect("/login")
 }
 
-app.listen(3000, function(){
-	console.log("server started!")
-});
+start();
