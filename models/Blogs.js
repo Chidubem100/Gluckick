@@ -10,6 +10,11 @@ var blogSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	user: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'User',
+		required: true
+	}
 },{timestamps: true});
 
 

@@ -3,37 +3,37 @@ const app         = express();
 const methodOverride = require("method-override");
 const expressSanitizer= require("express-sanitizer");
 const bodyParser  = require("body-parser");
-// const mongoose    = require("mongoose");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
-const Blog = require("./models/Blogs");
+// const Blog = require("./models/Blogs");
 
 
 const notFound = require('./middlewares/NotFound');
+const errorHandler =require('./middlewares/errorMid');
 const connectDB = require('./db/connection');
-
+const authRouter = require('./route/auth');
 // APP CONFIG
-// mongoose.connect("mongodb://localhost/restful_blog_app");
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method")); 
 app.use(require("express-session")({
-	secret: "Blogapp",
+	secret: "cfdfddfd",
 	resave: false,
 	saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());   
+// passport.use(new LocalStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());   
 
+app.use(authRouter);
 
 // ROUTES
 app.get("/", function(req, res){
@@ -109,24 +109,7 @@ app.delete("/blogs/:id", function(req, res){
 });
 
 // AUTH ROUTES
-// signup route
-app.get("/signup", function(req, res){
-	res.render("signup")
-});
-app.post("/signup", function(req, res){
-	req.body.username
-	req.body.password
-	req.body.email 
-	User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function(err, user){
-		if(err){
-			console.log(err)
-			return res.render("signup")
-		}
-		passport.authenticate("local")(req, res, function(){
-			res.redirect("/blogs/:id")
-		});
-	}); 
-});
+
 
 // login route
 app.get("/login", function(req,res){
@@ -148,7 +131,7 @@ app.get("/logout", function(req,res){
 
 
 app.use(notFound);
-
+app.use(errorHandler);
 
 const port = process.env.PORT || 3000
 

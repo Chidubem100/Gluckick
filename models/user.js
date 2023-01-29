@@ -1,8 +1,7 @@
-var mongoose = require("mongoose");
-var passportLocalMongoose = require("passport-local-mongoose");
+const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
-var UserSchema = new mongoose.Schema({
-
+const userSchema = new mongoose.Schema({
 	username: {
 		type: String,
 		required: [true, 'Please provide a valid username'],
@@ -17,23 +16,23 @@ var UserSchema = new mongoose.Schema({
 	},
 	email: {
 		type: String,
-		required: [true, "Please provide a valide email"],
+		required: [true, "Please provide a valid email"],
 		unique: true,
 		match: [
 			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 			'Please provide a valid email',
 		],
+	},
+	role: {
+		type: String,
+		default: "user",
+		enum: ["user","admin"],
+		required: true
 	}
+	
 });
 
 
+userSchema.plugin(passportLocalMongoose);
 
-
-
-
-
-
-
-UserSchema.plugin(passportLocalMongoose);
-
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", userSchema);
