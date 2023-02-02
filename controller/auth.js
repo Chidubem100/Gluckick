@@ -31,8 +31,14 @@ const register = asyncWrapper(async(req,res) =>{
 	const role = isAdmin ? 'admin' : 'user';
 
 	const user = await User.create({username,email,password,role});
-	if(user){
-		console.log(user)
+
+	const token = user.createJwt()
+
+	if(token){
+		console.log(user.username)
+		console.log(req.user.userId)
+		console.log(user.email)
+		// res.redirect("/blogs/:id")
 	}
 
 });

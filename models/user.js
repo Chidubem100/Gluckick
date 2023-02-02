@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
-const passportLocalMongoose = require("passport-local-mongoose");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+// const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new mongoose.Schema({
 	username: {
@@ -33,6 +35,27 @@ const userSchema = new mongoose.Schema({
 });
 
 
-userSchema.plugin(passportLocalMongoose);
+// userSchema.plugin(passportLocalMongoose);
+
+userSchema.pre('save', async function(){
+	if(!this.isModified('password')) return;
+	const salt = await bcrypt.genSalt(10);
+	this.password = await bcrypt.hash(this.password, salt) 
+});
+
+
+userSchema.methods.createJwt = function(){
+	return jwt.sign(
+		{
+			userId: this._id, username: this.username
+		},
+		'jbjhjjn',
+		// process.env.JWT_SECRET,
+		{
+			expiresIn: '30d',
+		}
+	)
+}; 
+
 
 module.exports = mongoose.model("User", userSchema);
