@@ -1,10 +1,12 @@
 const User = require('../models/user');
 const passport = require("passport");
 const asyncWrapper = require('../middlewares/asyncWrapper');
+const LocalStrategy = require("passport-local");
 
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());   
+
+passport.use(new LocalStrategy(User.authenticate('local')));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());   
 
 
 const signUp = (req,res) =>{
@@ -28,38 +30,56 @@ const register = asyncWrapper(async(req,res) =>{
 	}
 
 	const isAdmin = await User.countDocuments({}) === 0;
-	const role = isAdmin ? 'admin' : 'user';
+	const role = isAdmin ? 'admin' : 'user';	
 
-	const user = await User.create({username,email,password,role});
 
-	const token = user.createJwt()
-
-	if(token){
-		console.log(user.username)
-		console.log(req.user.userId)
-		console.log(user.email)
-		// res.redirect("/blogs/:id")
-	}
+	await User.create({username,email,password,role}, (err,user) => {
+		if(err){
+			console.log(err)
+			return res.render("signup")
+		}
+		console.log(user)
+		passport.authenticate("local")(req,res, function(){
+			// res.send("<h3>it worked</h3>")
+			res.render("login")
+		});
+	});
 
 });
 
-// app.post("/signup", function(req, res){
-// 	req.body.username
-// 	req.body.password
-// 	req.body.email 
-// 	User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function(err, user){
-// 		if(err){
-// 			console.log(err)
-// 			return res.render("signup")
-// 		}
-// 		passport.authenticate("local")(req, res, function(){
-// 			res.redirect("/blogs/:id")
-// 		});
-// 	}); 
-// });
+// login
+const loginC = (req,res) =>{
+	res.render("login")
+}
+
+const login = asyncWrapper(async(req,res) =>{
+	passport.authenticate('local', {
+		failureRedirect: '/login',
+		successRedirect: '/signup'
+	}),(req,res) =>{
+		console.log(req.user)
+	}
+	// res.send("hello world")
+});
+
+
+// logout route
+const logout = (req,res) =>{
+	req.logout();
+	res.redirect("/signup")
+}
 
 
 module.exports = {
     signUp,
     register,
+	loginC,
+	login,
+	logout
 }
+
+
+
+// chidubemNc     chidubemN
+// dubemNC@mail.com
+// chidubemN      chidubemN

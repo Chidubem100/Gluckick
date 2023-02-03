@@ -1,4 +1,4 @@
-require('dotenv');
+require('dotenv').config();
 
 const express = require("express");
 const app         = express();
@@ -6,16 +6,15 @@ const methodOverride = require("method-override");
 const expressSanitizer= require("express-sanitizer");
 const bodyParser  = require("body-parser");
 const passport = require("passport");
-const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require("passport-local");
-const User = require("./models/user");
-// const Blog = require("./models/Blogs");
 
 
 const notFound = require('./middlewares/NotFound');
 const errorHandler =require('./middlewares/errorMid');
 const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
+// const User = require('./models/user');
+
 // APP CONFIG
 
 app.set("view engine", "ejs");
@@ -24,16 +23,18 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method")); 
 app.use(require("express-session")({
-	secret: "cfdfddfd",
+	secret: process.env.SECRET,
 	resave: false,
-	saveUninitialized: false
+	saveUninitialized: true,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
 // passport.use(new LocalStrategy(User.authenticate()));
 // passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());   
+// passport.deserializeUser(User.deserializeUser());
+
+// passport.use(User.createStrategy(LocalStrategy()));
 
 app.use(authRouter);
 
@@ -110,26 +111,7 @@ app.delete("/blogs/:id", function(req, res){
 	});
 });
 
-// AUTH ROUTES
 
-
-// login route
-app.get("/login", function(req,res){
-	res.render("login")
-});
-
-app.post("/login", passport.authenticate("local", {
-	successRedirect: "/blogs/:id",
-	failureRedirect: "/login"
-}), function(req, res){
-
-});
-
-// logout route
-app.get("/logout", function(req,res){
-	req.logout()
-	res.redirect("/blogs")
-});
 
 
 app.use(notFound);

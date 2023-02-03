@@ -5,28 +5,23 @@ const router = express.Router();
 const {
 	signUp,
 	register,
+	login,
+	loginC,
+	logout
 } = require('../controller/auth');
 
 router.route('/signup').get(signUp).post(register);
 
-// signup route
-// app.get("/signup", function(req, res){
-// 	res.render("signup")
-// });
-// app.post("/signup", function(req, res){
-// 	req.body.username
-// 	req.body.password
-// 	req.body.email 
-// 	User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, function(err, user){
-// 		if(err){
-// 			console.log(err)
-// 			return res.render("signup")
-// 		}
-// 		passport.authenticate("local")(req, res, function(){
-// 			res.redirect("/blogs/:id")
-// 		});
-// 	}); 
-// });
+router.route('/login').get(loginC).post(login)
 
+router.route('/logout').get(logout);
+
+
+// app.post("/login", passport.authenticate("local", {
+	// successRedirect: "/blogs/:id",
+	// failureRedirect: "/login"
+// }), function(req, res){
+
+// });
 
 module.exports = router;
