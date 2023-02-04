@@ -13,7 +13,7 @@ const notFound = require('./middlewares/NotFound');
 const errorHandler =require('./middlewares/errorMid');
 const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
-// const User = require('./models/user');
+const User = require('./models/user');
 
 // APP CONFIG
 
@@ -29,12 +29,10 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());   
 
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
-// passport.use(User.createStrategy(LocalStrategy()));
 
 app.use(authRouter);
 

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-// const passportLocalMongoose = require("passport-local-mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new mongoose.Schema({
 	username: {
@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
 	},
 	password: {
 		type: String,
-		minlength: 7,
+		minlength: 6,
 		required: [true, 'Please provide a valid password not less than seven characters']
 	},
 	email: {
@@ -35,27 +35,30 @@ const userSchema = new mongoose.Schema({
 });
 
 
-// userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
-userSchema.pre('save', async function(){
-	if(!this.isModified('password')) return;
-	const salt = await bcrypt.genSalt(10);
-	this.password = await bcrypt.hash(this.password, salt) 
-});
+// userSchema.pre('save', async function(){
+// 	if(!this.isModified('password')) return;
+// 	const salt = await bcrypt.genSalt(10);
+// 	this.password = await bcrypt.hash(this.password, salt) 
+// });
 
-
-userSchema.methods.createJwt = function(){
-	return jwt.sign(
-		{
-			userId: this._id, username: this.username
-		},
-		'jbjhjjn',
-		// process.env.JWT_SECRET,
-		{
-			expiresIn: '30d',
-		}
-	)
-}; 
+// userSchema.methods.comparePassword = async function (canditatePassword) {
+// 	const isMatch = await bcrypt.compare(canditatePassword, this.password)
+// 	return isMatch
+// }
+// userSchema.methods.createJwt = function(){
+// 	return jwt.sign(
+// 		{
+// 			userId: this._id, username: this.username
+// 		},
+// 		'jbjhjjn',
+// 		// process.env.JWT_SECRET,
+// 		{
+// 			expiresIn: '30d',
+// 		}
+// 	)
+// }; 
 
 
 module.exports = mongoose.model("User", userSchema);
