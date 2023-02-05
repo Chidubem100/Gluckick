@@ -1,13 +1,12 @@
 require('dotenv').config();
 
 const express = require("express");
-const app         = express();
 const methodOverride = require("method-override");
 const expressSanitizer= require("express-sanitizer");
 const bodyParser  = require("body-parser");
 const passport = require("passport");
-const LocalStrategy = require("passport-local");
-
+const LocalStrategy = require("passport-local").Strategy;
+const path = require('path')
 
 const notFound = require('./middlewares/NotFound');
 const errorHandler =require('./middlewares/errorMid');
@@ -15,11 +14,15 @@ const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
 const User = require('./models/user');
 
-// APP CONFIG
+const app         = express();
 
+// APP CONFIG
+app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(expressSanitizer());
 app.use(methodOverride("_method")); 
 app.use(require("express-session")({
@@ -27,9 +30,11 @@ app.use(require("express-session")({
 	resave: false,
 	saveUninitialized: true,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(User.createStrategy());
+
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());   
 
