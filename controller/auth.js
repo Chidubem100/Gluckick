@@ -48,29 +48,32 @@ const loginC = (req,res) =>{
 	res.render("login")
 }
 
-const login = asyncWrapper(async(req,res) =>{
+const login = asyncWrapper(async(req,res,next) =>{
 	
 	const {username,password} = req.body;
 
 	if(!username || !password){
 		throw new Error('Enter the required values') 
 	}
-	passport.authenticate('local', {
-		failureFlash:true,
-		failureMessage: 'error occured',
-		failureRedirect: '/login',
-		successRedirect: '/signup'
-	},(err,req,res,next) =>{
+	passport.authenticate('local', (err,user,info) =>{
 		if(err){
 			console.log(err)
 		}
-		res.send('it worked')
-		// if(!err){
-		// 	res.send('it worked')
-		// }
-	});
-
-	
+		if(!user){
+			return res.redirect('/login?info=' + info)
+		}
+		// console.log({userId:req.user._id})
+		req.login(user, function(err){
+			if(err){
+				console.log(err)
+			}
+			const currentUser = req.user.id
+			console.log(currentUser)
+			// return res.redirect('/blogs/new'{})
+			return res.render('new', {currentUser})
+		});
+		// console.log(user)
+	})(req,res,next);	
 });
 
 

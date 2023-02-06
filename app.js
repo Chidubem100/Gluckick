@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(expressSanitizer());
 app.use(methodOverride("_method")); 
 app.use(require("express-session")({
-	secret: process.env.SECRET,
+	secret: 'secret',
 	resave: false,
 	saveUninitialized: true,
 }));
