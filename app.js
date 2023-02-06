@@ -12,6 +12,7 @@ const notFound = require('./middlewares/NotFound');
 const errorHandler =require('./middlewares/errorMid');
 const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
+const blogRouter = require('./route/blog');
 const User = require('./models/user');
 
 const app         = express();
@@ -38,38 +39,37 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());   
 
-
-app.use(authRouter);
-
 // ROUTES
+app.use(authRouter);
+app.use(blogRouter);
 app.get("/", function(req, res){
 	res.redirect("/blogs");
 });
 
-app.get("/blogs", function(req, res){
-    Blog.find({}, function(err, blogs){
-    	if(err){
-    		console.log("error");
-    	} else {
-    		res.render("index", {blogs: blogs});
-    	}
-    });
-}); 
+// app.get("/blogs", function(req, res){
+//     Blog.find({}, function(err, blogs){
+//     	if(err){
+//     		console.log("error");
+//     	} else {
+//     		res.render("index", {blogs: blogs});
+//     	}
+//     });
+// }); 
 
-app.get("/blogs/new",  function(req, res){
-	res.render("new");
-});
+// app.get("/blogs/new",  function(req, res){
+// 	res.render("new");
+// });
 
-app.post("/blogs", function(req, res){
-	req.body.blog.body = req.sanitize(req.body.blog.body);
-	Blog.create(req.body.blog, function(err, newBlog){
-		if(err){
-			res.render("new");
-		} else {
-			res.redirect("/blogs");
-		}
-	});
-});
+// app.post("/blogs", function(req, res){
+// 	req.body.blog.body = req.sanitize(req.body.blog.body);
+// 	Blog.create(req.body.blog, function(err, newBlog){
+// 		if(err){
+// 			res.render("new");
+// 		} else {
+// 			res.redirect("/blogs");
+// 		}
+// 	});
+// });
 
 app.get("/blogs/:id", function(req, res){
 	Blog.findById(req.params.id, function(err, foundBlog){

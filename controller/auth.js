@@ -62,7 +62,6 @@ const login = asyncWrapper(async(req,res,next) =>{
 		if(!user){
 			return res.redirect('/login?info=' + info)
 		}
-		// console.log({userId:req.user._id})
 		req.login(user, function(err){
 			if(err){
 				console.log(err)
@@ -72,7 +71,6 @@ const login = asyncWrapper(async(req,res,next) =>{
 			// return res.redirect('/blogs/new'{})
 			return res.render('new', {currentUser})
 		});
-		// console.log(user)
 	})(req,res,next);	
 });
 
