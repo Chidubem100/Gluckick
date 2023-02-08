@@ -5,7 +5,8 @@
 	<div class="ui top attached ">
 		<div class="item">
 			<div class="content">
-				<span><%= blog.created.toDateString() %></span>
+				<span>createdAt <%= blog.createdAt %></span>
+                <span>updatedAt <%= blog.updatedAt %></span>
 			</div>
 			<div class="description">
         		<p><%- blog.body %></p>
