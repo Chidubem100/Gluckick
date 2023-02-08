@@ -14,7 +14,6 @@ const register = asyncWrapper(async(req,res) =>{
 	if(password.length < 6){
 		throw new Error('Password should not be less than 6 characters');
 	}
-	console.log(req.body)
 	const emailAlreadyExist = await User.findOne({email})
 	if(emailAlreadyExist){
 		return res.send("Email already exist, user another email")
@@ -32,12 +31,10 @@ const register = asyncWrapper(async(req,res) =>{
 		if(err){
 			console.log(err)
 		}
-		console.log(user)
 		passport.authenticate("local")(req,res, function(){
-			res.send("<h3>it worked</h3>")
-			 		// res.render("new post")
+			res.redirect('/')
 		});
-
+		// console.log(user)
 	});
 
 
@@ -67,9 +64,9 @@ const login = asyncWrapper(async(req,res,next) =>{
 				console.log(err)
 			}
 			const currentUser = req.user.id
-			console.log(currentUser)
-			// return res.redirect('/blogs/new'{})
-			return res.render('new', {currentUser})
+			const user = req.user.username
+			console.log(`userId ${currentUser} and ${user}`)
+			return res.redirect('/')
 		});
 	})(req,res,next);	
 });
@@ -78,7 +75,7 @@ const login = asyncWrapper(async(req,res,next) =>{
 // logout route
 const logout = (req,res) =>{
 	req.logout();
-	res.redirect("/signup")
+	res.redirect("/login")
 }
 
 
@@ -92,6 +89,5 @@ module.exports = {
 
 
 
-// chidubemNc     chidubemN
-// dubemNC@mail.com
-// chidubemN      chidubemN
+// dubemernest23
+// dubemernest23
