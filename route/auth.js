@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {isLoggedIn} = require('../middlewares/authenticationMiddleware');
+const {isLoggedIn}= require('../middlewares/authenticationMiddleware');
 
 const {
 	signUp,
@@ -14,6 +14,6 @@ router.route('/signup').get(signUp).post(register);
 
 router.route('/login').get(loginC).post(login)
 
-router.route('/logout').get(isLoggedIn,logout);
+router.route('/logout').get(logout);
 
 module.exports = router;

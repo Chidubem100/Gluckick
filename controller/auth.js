@@ -31,13 +31,20 @@ const register = asyncWrapper(async(req,res) =>{
 		if(err){
 			console.log(err)
 		}
+		const oneDay = 1000* 60 * 60 * 24;
+    	res.cookie('token', user,
+   		    {
+    	        httpOnly:true,
+    	        expires: new Date(Date.now() + oneDay),
+    	        secure: process.env.NODE_ENV === 'production',
+    	        signed: true
+    	    }
+    	);
 		passport.authenticate("local")(req,res, function(){
 			res.redirect('/')
 		});
-		// console.log(user)
+		console.log(user)
 	});
-
-
 });
 
 // login
@@ -59,13 +66,27 @@ const login = asyncWrapper(async(req,res,next) =>{
 		if(!user){
 			return res.redirect('/login?info=' + info)
 		}
+		const oneDay = 1000* 60 * 60 * 24;
+		res.cookie('token', user,
+   		    {
+    	        httpOnly:true,
+    	        expires: new Date(Date.now() + oneDay),
+    	        secure: process.env.NODE_ENV === 'production',
+    	        signed: true
+    	    }
+    	);
+		// const {username,userId,role} = req.user;
+		// console.log(req.user)
+			// userId = req.user.id
+		const {username,role,_id:userId} = user;
+        req.user = {username,role,userId}
+		console.log(req.user)
 		req.login(user, function(err){
 			if(err){
 				console.log(err)
 			}
-			const currentUser = req.user.id
-			const user = req.user.username
-			console.log(`userId ${currentUser} and ${user}`)
+
+			// console.log(user)
 			return res.redirect('/')
 		});
 	})(req,res,next);	
@@ -74,8 +95,13 @@ const login = asyncWrapper(async(req,res,next) =>{
 
 // logout route
 const logout = (req,res) =>{
-	req.logout();
-	res.redirect("/login")
+	res.cookie('token', 'logout',
+        {
+            httpOnly: true,
+            expires: new Date(Date.now()),
+        }
+    );
+	res.redirect('/login')
 }
 
 

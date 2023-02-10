@@ -13,6 +13,7 @@ const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
 const blogRouter = require('./route/blog');
 const User = require('./models/user');
+const cookieParser = require('cookie-parser');
 const app         = express();
 
 // APP CONFIG
@@ -21,14 +22,15 @@ app.set("view engine", "ejs");
 app.use(expressSanitizer());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(methodOverride("_method")); 
-app.use(require("express-session")({
-	secret: process.env.SECRET,
-	resave: false,
-	saveUninitialized: true,
-}));
+app.use(methodOverride("_method"));
+app.use(cookieParser(process.env.SECRET)) 
+// app.use(require("express-session")({
+// 	secret: process.env.SECRET,
+// 	resave: false,
+// 	saveUninitialized: false,
+// }));
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -37,28 +39,6 @@ passport.deserializeUser(User.deserializeUser());
 // ROUTES
 app.use(authRouter);
 app.use(blogRouter);
-
-// app.get("/blogs/:id/edit", function(req, res){
-// 	Blog.findById(req.params.id, function(err, foundBlog){
-// 		if(err){
-// 			res.redirect("/blogs");
-// 		} else {
-// 			res.render("edit", {blog: foundBlog});
-// 		}
-// 	});
-// });
-
-// app.put("/blogs/:id", function(req, res){
-// 	req.body.blog.body = req.sanitize(req.body.blog.body);
-// 	Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
-// 		if(err){
-// 			res.redirect("/blogs");
-// 		} else {
-// 			res .redirect("/blogs/" + req.params.id);
-// 		}
-// 	});
-// });
-
 
 app.use(notFound);
 app.use(errorHandler);

@@ -15,8 +15,18 @@ const newBlog = asyncWrapper(async(req,res) =>{
 });
 
 const createBlog = asyncWrapper(async(req,res) =>{
-    // req.body.createdBy = req.user.id
-    // console.log(req.body.createdBy)
+    req.body.blog.createdBy = req.user
+    
+    
+    const author = {
+        id: req.body.blog.createdBy.id,
+        username:  req.body.blog.createdBy.username,
+    }
+    console.log(author)
+    // req.body.blog.createdBy = req.user
+    req.body.user = req.user.id;
+    req.body.userN = req.user.username
+    // console.log(req.body.user)
     req.body.blog.body = req.sanitize(req.body.blog.body)
     await Blog.create(req.body.blog,(err,newBlog) =>{
         if(err){
@@ -24,6 +34,7 @@ const createBlog = asyncWrapper(async(req,res) =>{
         }else{
             res.redirect('/')
         }
+        console.log(newBlog)
     });
 });
 
