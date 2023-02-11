@@ -13,11 +13,19 @@
             <input type="checkbox" id="checkbox_toggle">
             <label for="checkbox_toggle" class="hamburger">&#9776;</label>
             <div class="menu">
-               <li class="li" ><a  class="a" href="/">Home</a></li>
-               <li class="li" ><a  class="a" href="/blogs/new">New post</a></li>
-               <li class="li" ><a  class="a" href="/signup">Sign Up</a></li>
-               <li class="li" ><a  class="a" href="/login">Login</a></li>
-               <li class="li" ><a  class="a" href="/logout">Logout</a></li>
+               
+               <% if(!currentUser){ %>
+                  <li class="li" ><a  class="a" href="/">Home</a></li>
+                  <li class="li" ><a  class="a" href="/signup">Sign Up</a></li>
+                  <li class="li" ><a  class="a" href="/login">Login</a></li>
+               <% }else{ %>
+                  <li class="li">Signed in as: <%= currentUser.username %></li>
+                  <li class="li" ><a  class="a" href="/logout">Logout</a></li>
+               <% } %>
+               <!-- <% if(currentUser.role === admin){ %>
+                  <li class="li" ><a  class="a" href="/blogs/new">New Post</a></li>
+                  <li class="li" ><a  class="a" href="/logout">Logout</a></li>
+               <% } %>  -->
             </div> 
          </ul>
       </nav>

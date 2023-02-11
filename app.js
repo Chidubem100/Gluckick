@@ -13,8 +13,10 @@ const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
 const blogRouter = require('./route/blog');
 const User = require('./models/user');
+const currentUser = require('./middlewares/currentUser');
 const cookieParser = require('cookie-parser');
 const app         = express();
+
 
 // APP CONFIG
 app.set('views', path.join(__dirname, 'views'));
@@ -24,13 +26,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.use(cookieParser(process.env.SECRET)) 
-// app.use(require("express-session")({
-// 	secret: process.env.SECRET,
-// 	resave: false,
-// 	saveUninitialized: false,
-// }));
+app.use(require("express-session")({
+	secret: process.env.SECRET,
+	resave: false,
+	saveUninitialized: false,
+}));
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
+app.use(currentUser);
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());

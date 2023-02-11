@@ -43,7 +43,6 @@ const register = asyncWrapper(async(req,res) =>{
 		passport.authenticate("local")(req,res, function(){
 			res.redirect('/')
 		});
-		console.log(user)
 	});
 });
 
@@ -75,12 +74,9 @@ const login = asyncWrapper(async(req,res,next) =>{
     	        signed: true
     	    }
     	);
-		// const {username,userId,role} = req.user;
-		// console.log(req.user)
-			// userId = req.user.id
 		const {username,role,_id:userId} = user;
         req.user = {username,role,userId}
-		console.log(req.user)
+
 		req.login(user, function(err){
 			if(err){
 				console.log(err)
@@ -95,6 +91,7 @@ const login = asyncWrapper(async(req,res,next) =>{
 
 // logout route
 const logout = (req,res) =>{
+	req.logout();
 	res.cookie('token', 'logout',
         {
             httpOnly: true,

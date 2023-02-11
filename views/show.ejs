@@ -9,7 +9,8 @@
                 <span>updatedAt <%= blog.updatedAt %></span>
 			</div>
 			<div>
-				<span>createdby <%= blog.createdBy.username%></span>
+				<span> Creaeted By: <%=currentUser.username %></span>
+				<!-- <p><%=console.log(currentUser.username)%></p> -->
 			</div>
 			<div class="description">
         		<p><%- blog.body %></p>
