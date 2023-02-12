@@ -13,7 +13,7 @@ const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
 const blogRouter = require('./route/blog');
 const User = require('./models/user');
-const currentUser = require('./middlewares/currentUser');
+const {currentUser,Crole} = require('./middlewares/currentUser');
 const cookieParser = require('cookie-parser');
 const app         = express();
 
@@ -34,6 +34,7 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(currentUser);
+app.use(Crole);
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
