@@ -15,6 +15,7 @@ const blogRouter = require('./route/blog');
 const User = require('./models/user');
 const {currentUser,Crole} = require('./middlewares/currentUser');
 const cookieParser = require('cookie-parser');
+const falsh = require('connect-flash');
 const app         = express();
 
 
@@ -25,7 +26,8 @@ app.use(expressSanitizer());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
-app.use(cookieParser(process.env.SECRET)) 
+app.use(cookieParser(process.env.SECRET));
+app.use(falsh); 
 app.use(require("express-session")({
 	secret: process.env.SECRET,
 	resave: false,

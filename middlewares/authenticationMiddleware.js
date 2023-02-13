@@ -9,22 +9,13 @@ function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next()
 	}
-	// next();
-	// try {
-    //     const {username,role,_id:userId} = user;
-    //     req.user = {username,role,userId}
-    //     console.log(req.user)
-
-    //     // next()
-    // } catch (error) {
-    //     throw new Error('Unauthenticated')
-    // }
+	req.flash('success', 'Please login first!')
+	res.redirect('/login')
 }
 
 const authorization = (...roles) =>{
 	return (req,res,next) => {
 		if(!roles.includes(req.user.role)){
-			// res.redirect('/')
 			throw new Error('You are unauthorized to access this route')
 		}
 		next();

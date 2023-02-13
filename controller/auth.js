@@ -48,7 +48,7 @@ const register = asyncWrapper(async(req,res) =>{
 
 // login
 const loginC = (req,res) =>{
-	res.render("login")
+	res.render("login",{message: req.flash('error')})
 }
 
 const login = asyncWrapper(async(req,res,next) =>{
