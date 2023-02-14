@@ -92,12 +92,13 @@ const login = asyncWrapper(async(req,res,next) =>{
 // logout route
 const logout = (req,res) =>{
 	req.logout();
-	res.cookie('token', 'logout',
-        {
-            httpOnly: true,
-            expires: new Date(Date.now()),
-        }
-    );
+	req.flash('error', 'Logged you out');
+	// res.cookie('token', 'logout',
+    //     {
+    //         httpOnly: true,
+    //         expires: new Date(Date.now()),
+    //     }
+    // );
 	res.redirect('/login')
 }
 
