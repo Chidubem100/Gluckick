@@ -1,15 +1,10 @@
 
 function isLoggedIn(req, res, next){
-	const token = req.signedCookies.token
-	
-    if(!token){
-        throw new Error('Token absent')
-        // console.log('error, token absent')
-    }
+
 	if(req.isAuthenticated()){
 		return next()
 	}
-	req.flash('success', 'Please login first!')
+	req.flash('error', 'Please login first!')
 	res.redirect('/login')
 }
 

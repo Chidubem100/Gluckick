@@ -4,7 +4,8 @@ const errorHandler = (err,req,res,next) =>{
 
     res.status(err.status || 500);
     console.log(err)
-    res.send('<h2>An Error Occured, Plese try again</h2>')
+    req.flash('error', "An errror occured, Please try again")
+    // res.send('<h2>An Error Occured, Plese try again</h2>')
 
 }
 
