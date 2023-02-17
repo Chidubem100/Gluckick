@@ -21,9 +21,10 @@ const createBlog = asyncWrapper(async(req,res) =>{
     req.body.blog.body = req.sanitize(req.body.blog.body)
     await Blog.create(req.body.blog,(err,newBlog) =>{
         if(err){
-            console.log(err)
+            req.flash('error', err.message)
         }else{
-            res.redirect('/')
+            req.flash('success', 'Post created successfully')
+            res.redirect("/");
         }
         console.log(newBlog)
     });
@@ -45,7 +46,8 @@ const deleteBlog = asyncWrapper((req,res) =>{
         if(err){
             console.log(err)
         }else{
-            console.log('successfully deleted')
+            req.flash('success', 'Post deleted successfully')
+            // console.log('successfully deleted')
             res.redirect('/')
         }
     });
@@ -71,8 +73,8 @@ const updateBlog = asyncWrapper((req,res) =>{
         if(err){
             console.log(err)
         }else{
-            res .redirect("/blogs/" + req.params.id);
-            console.log(updatedBlog)
+            req.flash('success', 'Post edited sucessfully')
+            res.redirect("/blogs/" + req.params.id);
         }
     });
 });

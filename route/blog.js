@@ -7,7 +7,7 @@ const {getAllBlogs,newBlog,createBlog,getSingleBlog,deleteBlog,updateBlog,editPo
 router.get('/', getAllBlogs);
 router.get('/blogs/new', isLoggedIn,authorization('admin'),newBlog);
 router.post('/blogs',isLoggedIn,authorization('admin'),createBlog);
-router.route('/blogs/:id').get(getSingleBlog).delete(isLoggedIn,authorization('admin'),deleteBlog).put(isLoggedIn,authorization('admin'),updateBlog);
+router.route('/blogs/:id').get(isLoggedIn,getSingleBlog).delete(isLoggedIn,authorization('admin'),deleteBlog).put(isLoggedIn,authorization('admin'),updateBlog);
 router.get('/blogs/:id/edit', isLoggedIn,authorization('admin'),editPost)
 
 

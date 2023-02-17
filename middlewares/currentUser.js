@@ -6,10 +6,4 @@ const currentUser = (req,res,next) =>{
     next();
 }
 
-const Crole = (req,res,next) =>{
-    res.locals.Crole = req.user.role;
-    if(res.locals.Crole === 'admin') return;
-    next();
-}
-
-module.exports = {currentUser, Crole};
+module.exports = {currentUser};

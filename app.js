@@ -13,10 +13,10 @@ const connectDB = require('./db/connection');
 const authRouter = require('./route/auth');
 const blogRouter = require('./route/blog');
 const User = require('./models/user');
-const {currentUser,Crole} = require('./middlewares/currentUser');
+const {currentUser} = require('./middlewares/currentUser');
 const cookieParser = require('cookie-parser');
-const falsh = require('connect-flash');
-const app         = express();
+const flash = require('connect-flash');
+const app   = express();
 
 
 // APP CONFIG
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.use(cookieParser(process.env.SECRET));
-app.use(falsh); 
+app.use(flash()); 
 app.use(require("express-session")({
 	secret: process.env.SECRET,
 	resave: false,
@@ -36,7 +36,7 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(currentUser);
-app.use(Crole);
+
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -48,6 +48,7 @@ app.use(blogRouter);
 
 app.use(notFound);
 app.use(errorHandler);
+
 
 const port = process.env.PORT || 3000
 
