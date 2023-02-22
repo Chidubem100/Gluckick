@@ -18,12 +18,20 @@
                   <li class="li" ><a  class="a" href="/">Home</a></li>
                   <li class="li" ><a  class="a" href="/signup">Sign Up</a></li>
                   <li class="li" ><a  class="a" href="/login">Login</a></li>
-               <% }else{ %>
+               <% } %>
+                  
+               <% if(currentUser && currentUser.role === 'admin'){ %>
                   <li class="li">Signed in as: <%= currentUser.username %></li>
+                  <li class="li" ><a  class="a" href="/">Home</a></li>
                   <li class="li" ><a  class="a" href="/logout">Logout</a></li>
                   <li class="li" ><a  class="a" href="/blogs/new">New Post</a></li>
-                  
-               <% } %>
+               <% } %>		
+
+               <% if(currentUser && currentUser.role === 'user'){ %>
+                  <li class="li">Signed in as: <%= currentUser.username %></li>
+                  <li class="li" ><a  class="a" href="/">Home</a></li>
+                  <li class="li" ><a  class="a" href="/logout">Logout</a></li>
+               <% } %>		
 
             </div> 
          </ul>

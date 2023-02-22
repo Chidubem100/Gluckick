@@ -12,11 +12,9 @@
                             <span>createdAt <%= blog.createdAt %></span>
                             <span>updatedAt <%= blog.updatedAt %></span>
                         </div>
-                        <!-- <div class="description">
-                            <p><%= blog.body %>...</p>
-                        </div> -->
+                        
                         <div class="extra">
-                            <p><%= blog.body %></p>
+                            <p><%= blog.body.substring(0,120) %> ....</p>
                             <a class="ui floated basic violet button" href="/blogs/<%= blog._id %>">Read More</a>
                         </div>
                     </div>

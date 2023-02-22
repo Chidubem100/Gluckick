@@ -10,11 +10,11 @@ var blogSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'Title is required']
 	},
-	// createdBy: {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // },
+	createdBy: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 },{timestamps: true});
 
 
