@@ -18,7 +18,7 @@ const register = asyncWrapper(async(req,res) =>{
 	}
 	const emailAlreadyExist = await User.findOne({email})
 	if(emailAlreadyExist){
-		req.flash('error', 'Email already taken, Please pick another username');
+		req.flash('error', 'Email already linked to an existing account');
 		res.redirect('/signup');
 	}
 
@@ -36,7 +36,7 @@ const register = asyncWrapper(async(req,res) =>{
 			req.flash('error', err.message)
 		}
 		passport.authenticate("local")(req,res, function(){
-			req.flash('sucess', 'You have signed up successfully')
+			req.flash('success', 'You have signed up successfully')
 			res.redirect('/')
 		});
 	});
@@ -68,8 +68,7 @@ const login = asyncWrapper(async(req,res,next) =>{
 
 		req.login(user, function(err){
 			if(err){
-				req.flash('error', "An error occured")
-				// console.log(err)
+				req.flash('error', "An error occured");
 			}
 			console.log(user)
 			req.flash('success', 'You have successfully logged in')

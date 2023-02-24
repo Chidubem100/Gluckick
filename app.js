@@ -16,6 +16,7 @@ const User = require('./models/user');
 const {currentUser} = require('./middlewares/currentUser');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+const moment = require('moment');
 const app   = express();
 
 

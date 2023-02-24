@@ -15,8 +15,7 @@ const newBlog = asyncWrapper(async(req,res) =>{
 });
 
 const createBlog = asyncWrapper(async(req,res) =>{
-    req.body.blog.createdBy = req.user
-    // req.body.user = req.user.id;
+    req.body.blog.createdBy = req.user;
 
     req.body.blog.body = req.sanitize(req.body.blog.body)
     await Blog.create(req.body.blog,(err,newBlog) =>{
@@ -26,7 +25,6 @@ const createBlog = asyncWrapper(async(req,res) =>{
             req.flash('success', 'Post created successfully')
             res.redirect("/");
         }
-        console.log(newBlog)
     });
 });
 
@@ -89,10 +87,3 @@ module.exports = {
     updateBlog
 }
 
-
-
-// }else{ %>
-//     <li class="li">Signed in as: <%= currentUser.username %></li>
-//     <li class="li" ><a  class="a" href="/logout">Logout</a></li>
-//     <li class="li" ><a  class="a" href="/blogs/new">New Post</a></li>
-//  <% } %>
