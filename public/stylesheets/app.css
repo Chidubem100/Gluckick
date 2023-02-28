@@ -20,7 +20,7 @@ i.icon{
 .close{
 	width: 500px;
 	background: #0a2342;
-	color: #f2f3d;
+	color: #0f0f0f;
 	margin: 40px auto;
 	margin-top: 7.0em;
 	border-radius: 6px;
@@ -121,4 +121,15 @@ input[type=checkbox]{
 	.hamburger{
 		display: block;
 	}
+}
+
+
+.f-footer{
+	background-color: rgb(28, 28, 59);
+	margin: 25%;
+}
+
+.s-footer{
+	color: #fff;
+	margin: 25%;
 }
