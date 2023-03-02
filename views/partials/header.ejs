@@ -8,7 +8,7 @@
 
 
       <nav class="navbar">
-         <div class="logo">Blog site</div>
+         <div class="logo">Gluckick</div>
          <ul class="nav-links">
             <input type="checkbox" id="checkbox_toggle">
             <label for="checkbox_toggle" class="hamburger">&#9776;</label>
@@ -23,8 +23,8 @@
                <% if(currentUser && currentUser.role === 'admin'){ %>
                   <li class="li">Signed in as: <%= currentUser.username %></li>
                   <li class="li" ><a  class="a" href="/">Home</a></li>
-                  <li class="li" ><a  class="a" href="/logout">Logout</a></li>
                   <li class="li" ><a  class="a" href="/blogs/new">New Post</a></li>
+                  <li class="li" ><a  class="a" href="/logout">Logout</a></li>
                <% } %>		
 
                <% if(currentUser && currentUser.role === 'user'){ %>
@@ -41,13 +41,13 @@
       <div style="margin-top: 7px;">
          <% if(error && error.length > 0){ %>
             <div>
-               <span style="color: red; font-size: 20px;"> <%= error %> </span>
+               <span style="color: rgb(235, 16, 16); font-size: 20px;"> <%= error %> </span>
             </div>
          <% }%>
 
          <% if(success && success.length > 0){ %>
             <div>
-               <span style="color: green; font-size: 20px;"> <%= success %></span>
+               <span style="color: rgb(53, 192, 53); font-size: 20px;"> <%= success %></span>
             </div>
          <% }%>
          
