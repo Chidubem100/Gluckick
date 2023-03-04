@@ -124,12 +124,46 @@ input[type=checkbox]{
 }
 
 
-.f-footer{
-	background-color: rgb(28, 28, 59);
-	margin: 25%;
+/* for footer */
+.footer{
+    padding: 1rem;
+    background-color: #151414 ;
+}
+.ct-box{
+    position: relative;
+}
+.ct-box > .ct-icon{
+    width: 4rem;
+    padding-top: 0.5rem;
+}
+@media (max-width: 767.98px) {
+    .ct-box > .ct-icon{
+        width: 2rem;
+    }
 }
 
-.s-footer{
-	color: #fff;
-	margin: 25%;
+.ct-info{
+    padding: 0.4rem;
+    font-weight: 600;
+}
+.ct-info-title{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.4rem;
+}
+@media (max-width: 767.98px) {
+    .ct-info-title{
+        font-size: 1rem;
+    }
+}
+
+.sm-link{
+    color: white;
+}
+.sm-icon{
+    font-size: 1.3rem;
+    margin-left: 1rem
+}
+.f-year{
+    color: white;
 }
