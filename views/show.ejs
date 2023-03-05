@@ -4,15 +4,13 @@
 	<div class="ui huge header"><%= blog.title %></div>
 	<div class="ui top attached ">
 		<div class="item">
-			<div class="content">
-				<span>createdAt <%= blog.createdAt %></span>
-                <span>updatedAt <%= blog.updatedAt %></span>
+			
+			<div class="meta mb-4 mt-3">
+				<span>createdAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
+				<span>updatedAt: <%= moment(blog.updateddAt).format('MMMM Do YYYY') %></span>
 			</div>
-			<div>
-				<span> Creaeted By: <%= currentUser.username %></span>
-				
-			</div>
-			<div class="description">
+			
+			<div class="description mb-4">
         		<p><%- blog.body %></p>
 			</div>
 			<% if(currentUser && currentUser.role === 'admin'){ %>

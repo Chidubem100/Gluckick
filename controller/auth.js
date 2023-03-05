@@ -70,7 +70,6 @@ const login = asyncWrapper(async(req,res,next) =>{
 			if(err){
 				req.flash('error', "An error occured");
 			}
-			console.log(user)
 			req.flash('success', 'You have successfully logged in')
 			return res.redirect('/')
 		});

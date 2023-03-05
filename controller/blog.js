@@ -1,12 +1,16 @@
-
+const moment = require('moment');
 const Blog = require('../models/Blogs');
 const asyncWrapper = require('../middlewares/asyncWrapper');
 
 
 const getAllBlogs = asyncWrapper(async(req,res) =>{
-   const blogs = await Blog.find({});
+   const blogs = await Blog.find({}).sort('-createdAt');
+   var context = {
+    blogs:blogs,
+    moment
+   };
     if(blogs){
-        res.render('index', {blogs:blogs})
+        res.render('index', context)
     }
 });
 
@@ -32,7 +36,7 @@ const getSingleBlog = asyncWrapper((req,res) =>{
     Blog.findById(req.params.id, (err,foundBlog) =>{
         if(err){
             res.redirect('/blogs')
-            console.log(err)
+            
         }else{
             res.render("show", {blog: foundBlog});
         }
@@ -45,7 +49,7 @@ const deleteBlog = asyncWrapper((req,res) =>{
             console.log(err)
         }else{
             req.flash('success', 'Post deleted successfully')
-            // console.log('successfully deleted')
+            
             res.redirect('/')
         }
     });

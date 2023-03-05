@@ -9,8 +9,8 @@
                     <div class="content">
                         <a class="header" href="/blogs/<%= blog._id %>"><%=blog.title%></a>
                         <div class="meta">
-                            <span>createdAt <%= blog.createdAt %></span>
-                            <span>updatedAt <%= blog.updatedAt %></span>
+                            <span>createdAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
+                            <span>updatedAt: <%= moment(blog.updateddAt).format('MMMM Do YYYY') %></span>
                         </div>
                         
                         <div class="extra">
