@@ -12,10 +12,12 @@ const register = asyncWrapper(async(req,res) =>{
 		req.flash('error', 'Please provide the needed credentials');
 		res.redirect('/signup');
 	}
+
 	if(password.length < 6){
 		req.flash('error', 'Password must be more than 6 characters');
 		res.redirect('/signup');
 	}
+	
 	const emailAlreadyExist = await User.findOne({email})
 	if(emailAlreadyExist){
 		req.flash('error', 'Email already linked to an existing account');

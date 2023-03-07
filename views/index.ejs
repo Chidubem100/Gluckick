@@ -1,23 +1,47 @@
 <%- include ("partials/header") -%>
 
+
+
+<!-- <div class="container">
+    <div class="ui huge header">Gluckicks</div>
+    <div class="card text-center mb-5">
+        <% blogs.forEach(function(blog){ %>
+            <div class="card-header">
+                <a class="h2" href="/blogs/<%= blog._id %>"><%=blog.title%></a>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><%= blog.body.substring(0,120) %>...</p>
+                <a href="/blogs/<%= blog._id %>" class="btn btn-primary">Read More</a>
+            </div>
+            <div class="card-footer text-muted">
+                <span>createdAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
+                <br>
+                <span>updatedAt: <%= moment(blog.updateddAt).format('MMMM Do YYYY') %></span>
+            </div>
+        <% }) %>    
+    </div>
+</div> -->
+
+
 <div class="ui main text container">
-    <div class="ui huge header">Blog spot</div>
+    <div class="ui huge header">Gluckicks</div>
     <div class="ui top attached segment">
         <div class="ui divided items">
             <% blogs.forEach(function(blog){ %>
-                <div class="item">
+                <div class="item mb-4">
                     <div class="content">
-                        <a class="header" href="/blogs/<%= blog._id %>"><%=blog.title%></a>
-                        <div class="meta">
-                            <span>createdAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
-                            <span>updatedAt: <%= moment(blog.updateddAt).format('MMMM Do YYYY') %></span>
+                        <a class="header " href="/blogs/<%= blog._id %>"><%=blog.title%></a>
+                        <div class="card-footer text-muted" style="font-size: smaller;">
+                            <span>CreatedAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
                         </div>
                         
-                        <div class="extra">
+                        <div class="extra" style="color: rgb(17, 13, 13);">
                             <p><%= blog.body.substring(0,120) %>....</p>
                             <a class="ui floated basic violet button" href="/blogs/<%= blog._id %>">Read More</a>
                         </div>
+                        
                     </div>
+                    
                  </div>
             <% }) %>
         </div>

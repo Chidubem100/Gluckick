@@ -58,6 +58,8 @@ i.icon{
 	font-size: 25px;
 	font-weight: 300;
 }
+
+
 .para{
 	text-align: center;
 }
@@ -102,7 +104,7 @@ input[type=checkbox]{
 	font-size: 24px;
 	user-select: none;
 }
-@media (max-width: 768px){
+@media (max-width: 760px ){
 	.menu{
 		display: none;
 		position: absolute;

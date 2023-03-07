@@ -1,12 +1,12 @@
 <%- include ("partials/header") -%>
 
 <div class="ui main text container segment">
-	<div class="ui huge header"><%= blog.title %></div>
+	<div class="ui huge header" id="title"><%= blog.title %></div>
 	<div class="ui top attached ">
 		<div class="item">
-			
-			<div class="meta mb-4 mt-3">
+			<div class="card-footer text-muted" style="font-size: smaller; margin-bottom: 6px;">
 				<span>createdAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
+				<br>
 				<span>updatedAt: <%= moment(blog.updateddAt).format('MMMM Do YYYY') %></span>
 			</div>
 			
