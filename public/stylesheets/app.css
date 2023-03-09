@@ -104,7 +104,7 @@ input[type=checkbox]{
 	font-size: 24px;
 	user-select: none;
 }
-@media (max-width: 760px ){
+/* @media (max-width: 400px ){
 	.menu{
 		display: none;
 		position: absolute;
@@ -129,8 +129,71 @@ input[type=checkbox]{
 	.hamburger{
 		display: block;
 	}
+} */
+
+.nb{
+    background-color: var(--primary-800);
+    font-size: 2rem;
+}
+.navbar-brand{
+    font-size: 2rem;
+    font-family: cursive;
+}
+.navbar-light .navbar-brand{
+    color: rgba(234, 237, 243, 0.932);
+}
+.navbar-nav{
+    font-size: 1.7rem;
+    color: rgba(234, 237, 243, 0.932);
+}
+.nav-link{
+    color: rgba(234, 237, 243, 0.932);
+}
+.navbar-light .navbar-nav .nav-link{
+    color: white;
+    padding: 0.4rem;
 }
 
+/* for contact page */
+.contact{
+    margin-top: -4rem;
+    padding: 4rem 0;
+    background-color: rgb(233, 227, 227);
+	/* margin-left: 40rem; */
+}
+.c-grad{
+   background-color: var(--primary-1000);
+}
+.info{
+    padding: 3rem;
+    margin: 1rem 0;
+}
+.list{
+    position: relative;
+    list-style-type: none;
+    display: block;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
+    margin-bottom: 0.7rem;
+}
+.c-title{
+    color: #2d288f;
+    font-weight: 500;
+    text-transform: capitalize;
+    padding-left: 1.8rem;
+}
+.c-btn{
+    color: white;
+    font-weight: 600;
+    /* font-size: 3rem; */
+    background-color: #2d288f;
+}
+.c-btn:hover{
+    background: rgb(3, 18, 31);
+    color: rgb(241, 234, 234);
+    border: none;
+	box-shadow: rgb(89, 190, 197);
+}
 
 /* for footer */
 .footer{

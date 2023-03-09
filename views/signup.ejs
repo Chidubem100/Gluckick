@@ -1,18 +1,31 @@
-<%- include ("partials/header") -%>
+<%- include ("partials/head") -%>
 
-<div class="close">
-   <h2 class="h" >Sign Up</h2>
 
-   <form action="/signup" method="POST" class="mb-3">
-      <input class="input" type="text"  name="username" placeholder="Username">
-      <input class="input" type="email"  name="email" placeholder="Email">
-      <input class="input" type="password" name="password"  placeholder="Password">
-      <button class="go">Submit</button>
-   </form>
-   <p class="para" style="color: aliceblue;">
-      Already a User? <a href="/login">Login here</a>
-   </p>
 
-</div>
+<section class="contact">
+   
+   <div class="container  shadow p-3">
+      <div class="form  pb-2" >
+          <h4 class="display-3 c-title mb-3" style="font-weight: bold;">Sign Up</h4>
+          <form action="/signup" method="post" class="row" id="c-form" >
+              <div class="mb-3 ">
+                  <input type="text" class="form-control shadow form-control-lg pt-3 pb-3" style="border-radius: 15px;" id="username" name="username" placeholder="Username">
+              </div>
+              <div class="mb-3 " >
+                  <input type="email" name="email" class="form-control shadow form-control-lg pt-3 pb-3" style="border-radius: 15px;" id="email" placeholder="Email">
+              </div>
+              <div class="mb-3">
+                  <input type="password" name="password" class="form-control shadow form-control-lg pt-3 pb-3"  style="border-radius: 15px;" id="password" placeholder="Password">
+              </div>
+              <div class="d-grid text-center mt-1">
+                  <button type="submit" value="sendMessage" style="font-size: 25px;" class="btn btn-primary pt-3 pb-3 rounded-pill c-btn">Submit <i class="bi bi-send-fill"></i></button>
+              </div>
+          </form>
+            <p class="para mt-3" style=" font-size: 22px;color: rgb(41, 78, 110);">
+               Already a User? <a href="/login" style="color: rgb(34, 80, 121);">Login here</a>
+            </p> 
+      </div>
+   </div>
+</section>
 
 <%- include ("partials/footer") -%>
