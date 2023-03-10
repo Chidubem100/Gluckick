@@ -1,31 +1,29 @@
 <%- include ("partials/head") -%>
 
 
-
-<section class="contact">
-   
-   <div class="container  shadow p-3">
-      <div class="form  pb-2" >
-          <h4 class="display-3 c-title mb-3" style="font-weight: bold;">Sign Up</h4>
-          <form action="/signup" method="post" class="row" id="c-form" >
-              <div class="mb-3 ">
-                  <input type="text" class="form-control shadow form-control-lg pt-3 pb-3" style="border-radius: 15px;" id="username" name="username" placeholder="Username">
-              </div>
-              <div class="mb-3 " >
-                  <input type="email" name="email" class="form-control shadow form-control-lg pt-3 pb-3" style="border-radius: 15px;" id="email" placeholder="Email">
-              </div>
-              <div class="mb-3">
-                  <input type="password" name="password" class="form-control shadow form-control-lg pt-3 pb-3"  style="border-radius: 15px;" id="password" placeholder="Password">
-              </div>
-              <div class="d-grid text-center mt-1">
-                  <button type="submit" value="sendMessage" style="font-size: 25px;" class="btn btn-primary pt-3 pb-3 rounded-pill c-btn">Submit <i class="bi bi-send-fill"></i></button>
-              </div>
+<section class="" style="margin-top: 9rem;">
+    <div class="ui main text container segment">
+       <div class="ui huge header">Sign Up</div>
+          <form class="ui form" action="/signup" method="POST">
+            <div class="field">
+              <label>Username</label>
+              <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Email">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+             <input class="ui violet big basic button" type="submit">
           </form>
-            <p class="para mt-3" style=" font-size: 22px;color: rgb(41, 78, 110);">
-               Already a User? <a href="/login" style="color: rgb(34, 80, 121);">Login here</a>
-            </p> 
-      </div>
-   </div>
+          <p class="para mt-3" style=" font-size: 22px;color: rgb(41, 78, 110);">
+             Already a user? <a href="/login" style="color: rgb(34, 80, 121);">LogIn here</a>
+          </p> 
+    </div>
 </section>
+
 
 <%- include ("partials/footer") -%>

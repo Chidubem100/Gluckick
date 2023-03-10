@@ -9,8 +9,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const path = require('path')
 const notFound = require('./middlewares/NotFound');
 const errorHandler =require('./middlewares/errorMid');
-// const connectDB = require('./db/connection');
-const connectDB = require('./db/connect');
+const connectDB = require('./db/connection');
+// const connectDB = require('./db/connect');
 const authRouter = require('./route/auth');
 const blogRouter = require('./route/blog');
 const User = require('./models/user');
@@ -56,8 +56,8 @@ const port = process.env.PORT || 3000
 
 const start = async() =>{
 	try {
-		await connectDB(process.env.MONGO_URI)
-		// await connectDB()
+		// await connectDB(process.env.MONGO_URI)
+		await connectDB()
 		app.listen(port, () =>{
 			console.log(`server have started on ${port}`)
 		});

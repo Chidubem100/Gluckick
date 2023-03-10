@@ -2,19 +2,24 @@
 
 
 
-<div class=" container ">
-   <h2 class="h">Log in</h2>
-
-   <form action="/login" method="POST" class="mb-3">
-      <input  class="input" type="text"  name="username" placeholder="Username">
-      <input  class="input" type="password" name="password"  placeholder="Password">
-      <button class="go">Log in</button>
-   </form>
-
-   <p class="para " style="color: aliceblue;">
-      Don't have an account? <a href="/signup"> Sign Up here</a>
-   </p>
-
-</div>
+<section class="" style="margin-top: 9rem;">
+   <div class="ui main text container segment">
+      <div class="ui huge header">Log in</div>
+         <form class="ui form" action="/login" method="POST">
+            <div class="field">
+             <label>Username</label>
+             <input type="text" name="username" placeholder="Username">
+            </div>
+            <div class="field">
+               <label>Password</label>
+               <input type="password" name="password" placeholder="Password">
+              </div>
+            <input class="ui violet big basic button" type="submit">
+         </form>
+         <p class="para mt-3" style=" font-size: 22px;color: rgb(41, 78, 110);">
+            Not a user? <a href="/signup" style="color: rgb(34, 80, 121);">Signup here</a>
+         </p> 
+   </div>
+</section>
 
 <%- include ("partials/footer") -%>

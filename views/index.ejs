@@ -9,7 +9,7 @@
                 <% blogs.forEach(function(blog){ %>
                     <div class="item mb-4">
                         <div class="content">
-                            <a class="header " href="/blogs/<%= blog._id %>"><%=blog.title%></a>
+                            <a class="header " style="text-decoration: none;" href="/blogs/<%= blog._id %>" ><%=blog.title%></a>
                             <div class="card-footer text-muted" style="font-size: smaller;">
                                 <span>CreatedAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
                             </div>

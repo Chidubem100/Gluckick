@@ -1,14 +1,12 @@
 <%- include ("partials/head") -%>
 
-<section>
+<section style="margin-top: 10rem;">
 	<div class="ui main text container segment">
 		<div class="ui huge header" id="title"><%= blog.title %></div>
 		<div class="ui top attached ">
 			<div class="item">
 				<div class="card-footer text-muted" style="font-size: smaller; margin-bottom: 6px;">
 					<span>createdAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
-					<br>
-					<span>updatedAt: <%= moment(blog.updateddAt).format('MMMM Do YYYY') %></span>
 				</div>
 				
 				<div class="description mb-4">
@@ -24,41 +22,6 @@
 		</div>
 	</div>
 </section>
-<!-- <div class="ui main text container segment">
-	<div class="ui huge header" id="title"><%= blog.title %></div>
-	<div class="ui top attached ">
-		<div class="item">
-			<div class="card-footer text-muted" style="font-size: smaller; margin-bottom: 6px;">
-				<span>createdAt: <%= moment(blog.createdAt).format('MMMM Do YYYY') %></span>
-				<br>
-				<span>updatedAt: <%= moment(blog.updateddAt).format('MMMM Do YYYY') %></span>
-			</div>
-			
-			<div class="description mb-4">
-        		<p><%- blog.body %></p>
-			</div>
-			<% if(currentUser && currentUser.role === 'admin'){ %>
-				<a class="ui orange basic button" href="/blogs/<%= blog._id %>/edit">EDIT</a>
-				<form id="remove" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-					<button class="ui red basic button">DELETE</button>
-				</form>
-			<% } %>			
-		</div>
-	</div>
-</div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <%- include ("partials/footer") -%>

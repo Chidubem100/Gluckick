@@ -22,31 +22,36 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-            <div class="navbar-nav" style="color: aliceblue;">
+            <div class="navbar-nav">
                 
                 <% if(!currentUser){ %>
-                    <li class="li" ><a  class="a"  href="/">Home</a></li>
-                    <li class="li" ><a  class="a" href="/signup">Sign Up</a></li>
-                    <li class="li" ><a  class="a" href="/login">Login</a></li>
+                  <a class="nav-link " aria-current="page" href="/"  style="color:azure ;" >Home</a>
+                  <a class="nav-link" href="/signup" style="color:azure ;" >signUp</a>
+                  <a class="nav-link" href="/login" style="color:azure ;" >Login</a>
+                
                 <% } %>
                     
                 <% if(currentUser && currentUser.role === 'admin'){ %>
-                    <li class="li">Signed in as: <%= currentUser.username %></li>
-                    <li class="li" ><a  class="a" href="/">Home</a></li>
-                    <li class="li" ><a  class="a" href="/blogs/new">New Post</a></li>
-                    <li class="li" ><a  class="a" href="/logout">Logout</a></li>
+                    <a class="nav-link" href="#" style="color:azure ;" >Signed in as: <%= currentUser.username %></a>
+                    <a class="nav-link " aria-current="page" href="/"  style="color:azure ;" >Home</a>
+                    <a class="nav-link" href="/blogs/new" style="color:azure ;" >New Post</a>
+                    <a class="nav-link" href="/logout" style="color:azure ;" >Logout</a>
                 <% } %>		
   
                 <% if(currentUser && currentUser.role === 'user'){ %>
-                    <li class="li">Signed in as: <%= currentUser.username %></li>
-                    <li class="li" ><a  class="a" href="/">Home</a></li>
-                    <li class="li" ><a  class="a" href="/logout">Logout</a></li>
+                  <a class="nav-link" href="#" style="color:azure ;" >Signed in as: <%= currentUser.username %></a>
+                  <a class="nav-link " aria-current="page" href="/"  style="color:azure ;" >Home</a>
+                  <a class="nav-link" href="/logout" style="color:azure ;" >Logout</a>
+                   
                 <% } %>		
             </div>
           </div>
         </div>
     </nav>
-    <div class="container " style="margin-top: 5rem;">
+    <div class="ui main text container segment" style="margin-top: 0;">
+      <p>hello</p>
+    </div>
+    <div class="ui main container" style="margin-top: 6rem;">
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
